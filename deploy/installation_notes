@@ -1,0 +1,4 @@
+1. cd source/deploy;
+2. ./prepare_fs.sh # specify python version, e.g. "2.7"
+3. go to source directory, check "./manage.py help" command. Is it working?
+4. ./manage.py syncdb
