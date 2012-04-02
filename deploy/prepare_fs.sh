@@ -11,6 +11,7 @@ make_dirs(){
         echo -n "Creating folders..."
         mkdir -p \
                 static \
+                media \
             && echo "  ok" \
             || echo "  ERROR!" 1>&2;
     )

@@ -1,0 +1,25 @@
+.notify{
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	padding:10px 0;
+	background:#0C0;
+	border-bottom:2px solid #093;
+	color:#fff;
+	font-weight:bold;
+	text-align:center;
+	z-index:999;
+	display:none;
+}
+.notify.error{
+        background:#C00;
+}
+.notify .jm-close{
+	position:absolute;
+	top:10px;
+	right:10px;
+	width:16px;
+	height:16px;
+	background:url(./images/custom_close.png);
+}
