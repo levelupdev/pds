@@ -1,38 +1,28 @@
 {% extends "base.html" %}
+{% load bootstrap %}
 
-{% block user_messages %}
-    {% if form.errors.items|length %}
-        {% with 'Please correct the errors below.' as error_message %}
-            {{ block.super }}
-        {% endwith %}
-    {% else %}
-        {% with 'Please correct the error below.' as error_message %}
-            {{ block.super }}
-        {% endwith %}
-    {% endif %}
-{% endblock %}
+{% block title %}Login{% endblock %}
 
-{% if form.non_field_errors or form.this_is_the_login_form.errors %}
-{% for error in form.non_field_errors|add:form.this_is_the_login_form.errors %}
-<p class="errornote">
-    {{ error }}
-</p>
-{% endfor %}
-{% endif %}
+{% block navigation %}{% endblock %}
 
 {% block content %}
-    <form action="{{ app_path }}" method="post" id="login-form">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}" />
+    <div class="row">
+        <div class="span4">&nbsp;</div>
+        <form action="{{ app_path }}" method="post" id="login-form" class="well page-form span4">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next|default:'/' }}" />
 
-        {{ form }}
-        
-        <a href="{% url password_reset %}">Forgot password?</a>
-        <button type="submit">Login</button>
-    </form>
+            {{ form|bootstrap }}
+            
+            <div class="control-group">
+                <a href="{% url password_reset %}">Forgot password?</a>
+                <button class="btn btn-primary pull-right" type="submit">Login</button>
+            </div>
+        </form>
+    </div>
 {% endblock %}
 
-{% block forejs %}
+{% block endjs %}
     <script type="text/javascript">
         document.getElementById('id_username').focus();
     </script>

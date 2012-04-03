@@ -1,2 +1,5 @@
 pyyaml
+
 django==1.4
+
+git+git://github.com/tzangms/django-bootstrap-form.git
