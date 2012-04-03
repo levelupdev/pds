@@ -1,7 +1,8 @@
 from django.conf.urls.defaults import patterns, include, url
-from django.shortcuts import render
+
+from views import List
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', render, name='home', kwargs={'template_name': 'list.html'}),
+    url(r'^$', List.as_view(), name='list'),
 )

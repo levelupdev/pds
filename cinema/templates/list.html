@@ -2,6 +2,56 @@
 
 {% block title %}All items{% endblock %}
 
-{% block content %}
-List
-{% endblock %}
+
+{% block content %}{% spaceless %}
+
+    {% if request.REQUEST.search %}
+        <p>Search results for <b>'{{ request.REQUEST.search }}'</b>:</p>
+    {% endif %}
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Added</th>
+                <th>Added By</th>
+                <th>Last Modified</th>
+                <th>Modified By</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in object_list %}
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.created|date:"m/d/Y" }}</td>
+                <td>{{ item.created_by }}</td>
+                <td>{{ item.modified|date:"m/d/Y" }}</td>
+                <td>{{ item.modified_by }}</td>
+                {% if item.is_complete %}
+                    <td class="green">Complete</td>
+                {% else %}
+                    <td class="red">Incomplete</td>
+                {% endif %}
+                <td><a href="#">View</a>&nbsp;|&nbsp;<a href="#">Edit</a></td>
+            </tr>
+            {% empty %}
+                <tr><td colspan="7">List is empty</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {% if is_paginated %}
+        <p>
+            Paginated!
+            {% if page_obj.has_previous %}
+                <a href="./?page={{ page_obj.previous_page_number }}"><<</a>
+            {% endif %}
+            Page {{ page_obj.number }}
+            {% if page_obj.has_next %}
+                <a href="./?page={{ page_obj.next_page_number }}">>></a>
+            {% endif %}
+        </p>
+    {% endif %}
+{% endspaceless %}{% endblock %}

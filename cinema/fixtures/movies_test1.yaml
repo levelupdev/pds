@@ -1,0 +1,60 @@
+- fields:
+    date_joined: 2012-04-02 10:48:38.403587
+    email: anonymous@example.com
+    first_name: ''
+    groups: []
+    is_active: true
+    is_staff: true
+    is_superuser: true
+    last_login: 2012-04-03 09:47:05.747979
+    last_name: ''
+    password: 'pbkdf2_sha256$10000$KJXtyrFKx3q3$GBzZD8cZ9CURJ8XsQ+x4hknTCmcgzgQRe08lz/BK62w=' # 123
+    user_permissions: []
+    username: anonymous
+  model: auth.user
+  pk: 1
+- fields: {name: Premiere}
+  model: cinema.itunesprovider
+  pk: 1
+- fields:
+    copyright: 2012 Distribber
+    created: 2012-04-03 12:09:15.543633
+    created_by: [anonymous]
+    has_theatrical_release_date: true
+    is_complete: false
+    itunes_provider: 1
+    metadata_language: en-US
+    modified: 2012-04-03 12:12:18.511317
+    modified_by: [anonymous]
+    movie_type: tv
+    origin_country: US
+    original_locale: ''
+    production_company: Distribber Yearof
+    provider: Distribber
+    synopsis: This is a great movie
+    theatrical_release_date: 2012-02-01
+    title: Serial A
+    vendor_id: 129834IUH
+  model: cinema.movie
+  pk: 1
+- fields:
+    copyright: 2012 Distribber
+    created: 2012-04-03 12:09:15.543633
+    created_by: [anonymous]
+    has_theatrical_release_date: true
+    is_complete: false
+    itunes_provider: 1
+    metadata_language: en-US
+    modified: 2012-04-03 12:12:18.511317
+    modified_by: [anonymous]
+    movie_type: tv
+    origin_country: US
+    original_locale: ''
+    production_company: Distribber Yearof
+    provider: Distribber
+    synopsis: This is a not great movie
+    theatrical_release_date: 2012-03-01
+    title: Serial B
+    vendor_id: 129834IUH
+  model: cinema.movie
+  pk: 2

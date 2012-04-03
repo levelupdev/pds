@@ -11,4 +11,8 @@ footer p.copyright {margin-right: 20px;}
     margin-right: auto;
     width: 220px;   
 }
+
 .control-label {font-weight: bold;}
+
+.green {color: green;}
+.red {color: red;}
