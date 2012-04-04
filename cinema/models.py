@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 from django.contrib.auth.models import User
 
@@ -36,6 +37,9 @@ class Movie(TimeStampedModel):
     
     created_by = models.ForeignKey(User, related_name='created_records')
     modified_by = models.ForeignKey(User, related_name='modified_records')
-                
+    
+    def get_absolute_url(self):
+        return reverse('details', kwargs={'pk': self.pk})
+    
     def __unicode__(self):
         return self.title

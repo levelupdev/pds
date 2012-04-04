@@ -2,13 +2,19 @@ import operator
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.views.generic import FormView, ListView
+from django.views.generic import FormView, ListView, DetailView
 from django.db.models import Q
 
 from models import Movie
 from forms import BasicInfo
 
-class List(ListView):
+class LoginRequiredMixin(object):
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
+        
+
+class List(LoginRequiredMixin, ListView):
     template_name = 'list.html'
     paginate_by = 50
     search_fields = 'title'.split(',')
@@ -23,14 +29,10 @@ class List(ListView):
                 or_queries = [Q(**{orm_lookup: bit}) for orm_lookup in orm_lookups]
                 query = query.filter(reduce(operator.or_, or_queries))
         return query      
-    
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(List, self).dispatch(*args, **kwargs)
-    
-class ProtectedView(FormView):
-    template_name = 'secret.html'
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ProtectedView, self).dispatch(*args, **kwargs)
+class MovieDetails(LoginRequiredMixin, DetailView):
+    template_name = 'details.html'
+    model = Movie
+    
+class Edit(LoginRequiredMixin, FormView):
+    template_name = 'secret.html'

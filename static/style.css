@@ -16,3 +16,25 @@ footer p.copyright {margin-right: 20px;}
 
 .green {color: green;}
 .red {color: red;}
+
+dl.info {
+    display: block;
+    border-top: #CCC 2px solid;
+    padding-top: 30px;
+    margin: 0 0 10px 0;
+    width: 800px;
+}
+dl.info dt{
+    display: block;
+    float: left;
+    width: 300px;
+    text-align: right;
+    clear: left;
+}
+dl.info dd{
+    display: block;
+    margin-left: 310px;
+    clear: right;
+    margin-bottom: 5px;
+    min-height: 18px;
+}

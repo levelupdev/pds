@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block content %}{% spaceless %}
+    <p>Metadata information for: <b>{{ object.title }}</b></p>
+    
+    <h3>Basic Info</h3>
+    <dl class="info">
+        <dt>Title:</dt><dd>{{ object.title }}</dd>
+        <dt>Provider:</dt><dd>{{ object.provider }}</dd>
+        <dt>Provider (for iTunes):</dt><dd>{{ object.itunes_provider }}</dd>
+        <dt>Language of Metadata:</dt><dd>{{ object.metadata_language }}</dd>
+        <dt>Vendor ID:</dt><dd>{{ object.vendor_id }}</dd>
+        <dt>Country of Origin:</dt><dd>{{ object.origin_country }}</dd>
+        <dt>Copyright:</dt><dd>{{ object.copyright }}</dd>
+        <dt>Production Company:</dt><dd>{{ object.production_company }}</dd>
+        {% if object.has_theatrical_release_date %}
+            <dt>Theatrical Release Date:</dt><dd>{{ object.theatrical_release_date|date:"Y/m/d" }}</dd>
+        {% endif %}
+        <dt>Synopsis:</dt><dd>{{ object.synopsis }}</dd>
+    </dl>
+
+    <h3>Territory, Rating and Genre</h3>
+    <dl class="info">
+        <dt>Territory:</dt><dd>{{ object }}<br/>{{ object }}</dd>
+        <dt>Genre:</dt><dd>{{ object }}<br/>{{ object }}</dd>
+    </dl>
+
+    <h3>Crew and Cast</h3>
+    <dl class="info">
+        <dt>Crew:</dt><dd>{{ object }}</dd>
+        <dt>Cast:</dt><dd>{{ object }}</dd>
+    </dl>
+
+    <h3>Sales Info</h3>
+    <dl class="info">
+        <dt>Cleared for Sale:</dt><dd>{{ object }}</dd>
+        <dt>Sales Start Date:</dt><dd>{{ object }}</dd>
+        <dt>Sales End Date:</dt><dd>{{ object }}</dd>
+        <dt>Cleared for VOD:</dt><dd>{{ object }}</dd>
+        <dt>VOD Type:</dt><dd>{{ object }}</dd>
+        <dt>Physical Release Date:</dt><dd>{{ object }}</dd>
+    </dl>
+
+    <h3>Chapter and Poster Art</h3>
+    <dl class="info">
+        <dt>iTunes Poster Art:</dt><dd>{{ object }}</dd>
+        <dt>Chaptering:</dt><dd>{{ object }}</dd>
+    </dl>
+
+    <h3>Feature and Trailer</h3>
+    <dl class="info">
+        <dt>Feature Crop Top:</dt><dd>{{ object }}</dd>
+        <dt>Feature Crop Bottom:</dt><dd>{{ object }}</dd>
+        <dt>Feature Crop Left:</dt><dd>{{ object }}</dd>
+        <dt>Feature Crop Right:</dt><dd>{{ object }}</dd>
+        <dt>Feature Spoken Language:</dt><dd>{{ object }}</dd>
+        <dt>Feature Subtitles:</dt><dd>{{ object }}</dd>
+        <dt>Feature Forces Narrative:</dt><dd>{{ object }}</dd>
+        <dt>Feature Additional Assets:</dt><dd>{{ object }}</dd>
+        <dt>Trailer Crop Top:</dt><dd>{{ object }}</dd>
+        <dt>Trailer Crop Bottom:</dt><dd>{{ object }}</dd>
+        <dt>Trailer Crop Left:</dt><dd>{{ object }}</dd>
+        <dt>Trailer Crop Right:</dt><dd>{{ object }}</dd>
+        <dt>Trailer Spoken Language:</dt><dd>{{ object }}</dd>
+        <dt>Trailer Subtitles:</dt><dd>{{ object }}</dd>
+        <dt>Trailer Forces Narrative:</dt><dd>{{ object }}</dd>
+        <dt>Trailer Additional Assets:</dt><dd>{{ object }}</dd>
+    </dl>
+{% endspaceless %}{% endblock %}

@@ -128,3 +128,5 @@ INSTALLED_APPS = (
     'bootstrapform',
     'cinema',
 )
+
+LOGIN_URL = '/login/'
