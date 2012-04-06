@@ -33,7 +33,11 @@
                 {% else %}
                     <td class="red">Incomplete</td>
                 {% endif %}
-                <td><a href="{{ item.get_absolute_url }}">View</a>&nbsp;|&nbsp;<a href="{% url edit_basic_info item.pk %}">Edit</a></td>
+                <td>
+                    <a href="{{ item.get_absolute_url }}">View</a>
+                    {% if perms.cinema.change_movie %}&nbsp;|&nbsp;<a href="{% url edit_basic_info item.pk %}">Edit</a>{% endif %}
+                    {% if perms.cinema.delete_movie %}&nbsp;|&nbsp;<a href="{% url delete item.pk %}">Delete</a>{% endif %}
+                </td>
             </tr>
             {% empty %}
                 <tr><td colspan="7">List is empty</td></tr>

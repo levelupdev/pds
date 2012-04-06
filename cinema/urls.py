@@ -1,12 +1,13 @@
 from django.conf.urls.defaults import patterns, include, url
 
-from views import List, MovieDetails, Add, BasicInfoEdit
+from views import List, MovieDetails, Add, Delete, BasicInfoEdit
 
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', List.as_view(), name='list'),
     url(r'^(?P<pk>\d+)/$', MovieDetails.as_view(), name='details'),
     url(r'^add/$', Add.as_view(), name='add'),
+    url(r'^delete/(?P<pk>\d+)/$', Delete.as_view(), name='delete'),
     url(r'^basic_info/(?P<pk>\d+)/$', BasicInfoEdit.as_view(), name='edit_basic_info'),
     url(r'^rating_and_genre/(?P<pk>\d+)/$', BasicInfoEdit.as_view(), name='edit_rating_and_genre'),
     url(r'^crew_and_cast/(?P<pk>\d+)/$', BasicInfoEdit.as_view(), name='edit_crew_and_cast'),

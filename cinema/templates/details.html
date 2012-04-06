@@ -6,10 +6,11 @@
     <li class="active"><a href="{% url details object.pk %}">Details</a></li>
 {% endblock %}
 
-{% block content %}{% spaceless %}
+{% block content %}{% spaceless %}{% with perms.cinema.change_movie as can_change %}
     <p>Metadata information for: <b>{{ object.title }}</b></p>
     
     <h3>Basic Info</h3>
+    {% if can_change %}<a class="edit_link" href="{% url edit_basic_info object.pk %}">Edit</a>{% endif %}
     <dl class="info">
         <dt>Title:</dt><dd>{{ object.title }}</dd>
         <dt>Provider:</dt><dd>{{ object.provider }}</dd>
@@ -26,18 +27,21 @@
     </dl>
 
     <h3>Territory, Rating and Genre</h3>
+    {% if can_change %}<a class="edit_link" href="{% url edit_rating_and_genre object.pk %}">Edit</a>{% endif %}
     <dl class="info">
         <dt>Territory:</dt><dd>{{ object }}<br/>{{ object }}</dd>
         <dt>Genre:</dt><dd>{{ object }}<br/>{{ object }}</dd>
     </dl>
 
     <h3>Crew and Cast</h3>
+    {% if can_change %}<a class="edit_link" href="{% url edit_crew_and_cast object.pk %}">Edit</a>{% endif %}
     <dl class="info">
         <dt>Crew:</dt><dd>{{ object }}</dd>
         <dt>Cast:</dt><dd>{{ object }}</dd>
     </dl>
 
     <h3>Sales Info</h3>
+    {% if can_change %}<a class="edit_link" href="{% url edit_sales_info object.pk %}">Edit</a>{% endif %}
     <dl class="info">
         <dt>Cleared for Sale:</dt><dd>{{ object }}</dd>
         <dt>Sales Start Date:</dt><dd>{{ object }}</dd>
@@ -48,12 +52,14 @@
     </dl>
 
     <h3>Chapter and Poster Art</h3>
+    {% if can_change %}<a class="edit_link" href="{% url edit_art object.pk %}">Edit</a>{% endif %}
     <dl class="info">
         <dt>iTunes Poster Art:</dt><dd>{{ object }}</dd>
         <dt>Chaptering:</dt><dd>{{ object }}</dd>
     </dl>
 
     <h3>Feature and Trailer</h3>
+    {% if can_change %}<a class="edit_link" href="{% url edit_feature_and_trailer object.pk %}">Edit</a>{% endif %}
     <dl class="info">
         <dt>Feature Crop Top:</dt><dd>{{ object }}</dd>
         <dt>Feature Crop Bottom:</dt><dd>{{ object }}</dd>
@@ -72,4 +78,4 @@
         <dt>Trailer Forces Narrative:</dt><dd>{{ object }}</dd>
         <dt>Trailer Additional Assets:</dt><dd>{{ object }}</dd>
     </dl>
-{% endspaceless %}{% endblock %}
+{% endwith %}{% endspaceless %}{% endblock %}

@@ -21,7 +21,7 @@ class Movie(TimeStampedModel):
     movie_type = models.CharField(max_length=10, choices = MOVIE_TYPES)
     title = models.CharField(max_length=100)
     provider = models.CharField(max_length=100, blank=True)
-    itunes_provider = models.ForeignKey(iTunesProvider, blank=True)
+    itunes_provider = models.ForeignKey(iTunesProvider, null=True, blank=True)
     
     metadata_language = models.CharField(max_length=100, blank=True)
     vendor_id = models.CharField(max_length=100, blank=True)
@@ -30,7 +30,7 @@ class Movie(TimeStampedModel):
     copyright = models.CharField(max_length=100, blank=True)
     production_company = models.CharField(max_length=100, blank=True)
     has_theatrical_release_date = models.BooleanField(default=True)
-    theatrical_release_date = models.DateField(blank=True)
+    theatrical_release_date = models.DateField(null=True, blank=True)
     synopsis = models.TextField(blank=True)
     
     is_complete = models.BooleanField(default=False)

@@ -38,3 +38,10 @@ dl.info dd{
     margin-bottom: 5px;
     min-height: 18px;
 }
+.edit_link{
+    display: block;
+    width: 100px;
+    text-align: right;
+    margin-top: -20px;
+    margin-left: 700px;
+}

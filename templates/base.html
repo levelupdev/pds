@@ -65,7 +65,7 @@
                         <a href="{{ list_url }}">List</a>
                     </li>
                     {% block extra_tabs %}
-                        <li><a href="{% url add %}">Add</a></li>
+                        {% if perms.cinema.add_movie %}<li><a href="{% url add %}">Add</a></li>{% endif %}
                     {% endblock %}
                 </ul>
             {% endblock %}
