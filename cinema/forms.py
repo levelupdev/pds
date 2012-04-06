@@ -3,10 +3,15 @@ from django import forms
 from models import Movie
 
 class BaseMovieEdit(forms.ModelForm):
-    def save(self, author):
+    def save(self, author, commit=True):
         obj = super(BaseMovieEdit, self).save(commit=False)
+
+        obj.created_by = (obj.created_by_id and obj.created_by) or author
         obj.modified_by = author
-        obj.save()
+
+        if commit:
+            obj.save()
+
         return obj
         
 class BasicInfo(BaseMovieEdit):

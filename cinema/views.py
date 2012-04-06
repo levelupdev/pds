@@ -7,6 +7,8 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
+from django.contrib.messages import success, error
+
 from models import Movie
 from forms import BasicInfo as BasicInfoForm
 
@@ -46,15 +48,26 @@ class BaseMovieEditMixin(object):
     get_previous_url = get_next_url = None
         
     def form_valid(self, form):
-        self.object = form.save(self.request.user)
+        obj = self.object = form.save(self.request.user, commit=False)
+        obj.is_complete = obj.is_complete or 'finish' in self.request.REQUEST
+        obj.save()
+        success(self.request, '%s was successfully saved' % obj.title)
         
         if 'next' in self.request.REQUEST and self.get_next_url:
-            return HttpResponseRedirect(self.get_next_url())
+            url = self.get_next_url()
         elif 'previous' in self.request.REQUEST and self.get_previous_url:
-            return HttpResponseRedirect(self.get_previous_url())
+            url = self.get_previous_url()
+        elif 'finish' in self.request.REQUEST:
+            url = reverse('list')
         else:
-            return HttpResponseRedirect(self.request.path)
+            url = self.request.path
+        
+        return HttpResponseRedirect(url)
 
+    def form_invalid(self, form):
+        error(self.request, 'Please correct inputs')
+        return super(BaseMovieEditMixin, self).form_invalid(form)
+        
 class Add(BaseMovieEditMixin, LoginRequiredMixin, CreateView):
     template_name = 'basic_info.html'
     form_class = BasicInfoForm

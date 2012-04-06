@@ -41,16 +41,13 @@
         </tbody>
     </table>
     
-    {% if is_paginated %}
-        <p>
-            Paginated!
-            {% if page_obj.has_previous %}
-                <a class="btn" href="./?page={{ page_obj.previous_page_number }}"><<</a>
-            {% endif %}
-            Page {{ page_obj.number }}
-            {% if page_obj.has_next %}
-                <a class="btn" href="./?page={{ page_obj.next_page_number }}">>></a>
-            {% endif %}
-        </p>
-    {% endif %}
+    <ul class="pager">
+        <li class="previous {% if not is_paginated or not page_obj.has_previous %}disabled{% endif %}">
+            <a href="./?page={{ page_obj.previous_page_number }}">&larr; Previous</a>
+        </li>
+        {% if is_paginated %}<li>page #{{ page_obj.number }} of {{ paginator.count }}</li>{% endif %}
+        <li class="next {% if not is_paginated or not page_obj.has_next %}disabled{% endif %}">
+            <a href="./?page={{ page_obj.next_page_number }}">Next &rarr;</a>
+        </li>
+    </ul>
 {% endspaceless %}{% endblock %}
