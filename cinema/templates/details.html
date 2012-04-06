@@ -2,6 +2,10 @@
 
 {% block title %}{{ object.title }}{% endblock %}
 
+{% block extra_tabs %}
+    <li class="active"><a href="{% url details object.pk %}">Details</a></li>
+{% endblock %}
+
 {% block content %}{% spaceless %}
     <p>Metadata information for: <b>{{ object.title }}</b></p>
     

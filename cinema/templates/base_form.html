@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block extra_tabs %}
+    {% autoescape off %}
+        <li{{ step1|yesno:' class="active",' }}><a href="{% url edit_basic_info object.pk %}">Basic Info</a></li>
+        <li{{ step2|yesno:' class="active",' }}><a href="{% url edit_rating_and_genre object.pk %}">Rating and Genre</a></li>
+        <li{{ step3|yesno:' class="active",' }}><a href="{% url edit_crew_and_cast object.pk %}">Crew and Cast</a></li>
+        <li{{ step4|yesno:' class="active",' }}><a href="{% url edit_sales_info object.pk %}">Sales Info</a></li>
+        <li{{ step5|yesno:' class="active",' }}><a href="{% url edit_art object.pk %}">Chapter and Poster Art</a></li>
+        <li{{ step6|yesno:' class="active",' }}><a href="{% url edit_feature_and_trailer object.pk %}">Feature and Trailer</a></li>
+    {% endautoescape %}
+{% endblock %}

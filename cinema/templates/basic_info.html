@@ -1,0 +1,23 @@
+{% extends 'base_form.html' %}
+{% load bootstrap %}
+
+{% block title %}{{ form.instance.pk|yesno:'Basic Info,Add,Add' }}{% endblock %}
+
+{% block extra_tabs %}
+    {% if form.instance.pk %}
+        {% with 1 as step1 %}
+            {{ block.super }}
+        {% endwith %}
+    {% else %}
+        <li class="active"><a href="{% url add %}">Add</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <form action="./" method="post" class="js_active_form">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+
+        {% include 'base_form_buttons.html' with previous_off=1 only %} 
+    </form>
+{% endblock %}

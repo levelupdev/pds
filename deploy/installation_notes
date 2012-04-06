@@ -1,4 +1,13 @@
-1. cd source/deploy;
-2. ./prepare_fs.sh # specify python version, e.g. "2.7"
-3. go to source directory, check "./manage.py help" command. Is it working?
-4. ./manage.py syncdb
+Debian system requirements:
+    nginx
+    python-virtualenv
+
+Installation algorithm:
+    1. cd source/deploy; ./prepare_fs.sh # specify python version, e.g. "2.7"
+    2. cd ../; source ../env/bin/activate; # activate virtualenv
+    3. python manage.py help # Is it working?
+    4. python manage.py syncdb
+    5. python manage.py runserver # ckeck 127.0.0.1:8000 address with browser
+    6. # install and configure nginx using /deploy/* files
+    7. # check and change local_setting.py file
+    8. python manage.py runfcgi # get correct address from nginx configuration file

@@ -3,7 +3,6 @@
 from local_settings import DEBUG, DATABASES, SOURCE_ROOT, LOGGING
 from os.path import join
 
-DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -126,6 +125,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     
     'bootstrapform',
+    'django_extensions',
     'cinema',
 )
 

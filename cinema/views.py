@@ -2,17 +2,18 @@ import operator
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.views.generic import FormView, ListView, DetailView
+from django.views.generic import UpdateView, ListView, DetailView, CreateView
 from django.db.models import Q
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from models import Movie
-from forms import BasicInfo
+from forms import BasicInfo as BasicInfoForm
 
 class LoginRequiredMixin(object):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
-        
 
 class List(LoginRequiredMixin, ListView):
     template_name = 'list.html'
@@ -20,7 +21,7 @@ class List(LoginRequiredMixin, ListView):
     search_fields = 'title'.split(',')
 
     def get_queryset(self):
-        'apply keyword search'
+        'applies keyword search'
         query = Movie.objects.all()
         search_phrase = self.request.REQUEST.get('search', None)
         if search_phrase:
@@ -33,6 +34,33 @@ class List(LoginRequiredMixin, ListView):
 class MovieDetails(LoginRequiredMixin, DetailView):
     template_name = 'details.html'
     model = Movie
+
+class BaseMovieEditMixin(object):
+    ''' Mixin to use with FormView for Movie model
+        handles "previous" and "next" request params,
+        expects forms.BaseMovieEdit form subclass,
+        expects get_next_url and get_previous_url methods instead of get_success_url
+    '''
     
-class Edit(LoginRequiredMixin, FormView):
-    template_name = 'secret.html'
+    model = Movie
+    get_previous_url = get_next_url = None
+        
+    def form_valid(self, form):
+        self.object = form.save(self.request.user)
+        
+        if 'next' in self.request.REQUEST and self.get_next_url:
+            return HttpResponseRedirect(self.get_next_url())
+        elif 'previous' in self.request.REQUEST and self.get_previous_url:
+            return HttpResponseRedirect(self.get_previous_url())
+        else:
+            return HttpResponseRedirect(self.request.path)
+
+class Add(BaseMovieEditMixin, LoginRequiredMixin, CreateView):
+    template_name = 'basic_info.html'
+    form_class = BasicInfoForm
+    get_next_url = lambda self: reverse('edit_rating_and_genre', kwargs={'pk': self.object.pk})
+    
+class BasicInfoEdit(BaseMovieEditMixin, LoginRequiredMixin, UpdateView):
+    template_name = 'basic_info.html'
+    form_class = BasicInfoForm
+    get_next_url = lambda self: reverse('edit_rating_and_genre', kwargs={'pk': self.object.pk})

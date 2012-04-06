@@ -1,0 +1,26 @@
+{% spaceless %}
+    {# typical button/link set for metadata forms #}
+    <div class="row">
+        <div class="span4">
+            {% if not previous_off %}
+                <button type="submit" class="btn" name="previous">Previous</button>
+            {% else %}
+                &nbsp;
+            {% endif %}
+        </div>
+        <div class="span4">
+            {% if not reset_off %}
+                <a class="btn" href="./">Reset changes</a>
+            {% else %}
+                &nbsp;
+            {% endif %}
+        </div>
+        <div class="span4">
+            {% if not next_off %}
+                <button type="submit" class="btn btn-primary" name="next">Next</button>
+            {% else %}
+                &nbsp;
+            {% endif %}
+        </div>
+    </div>
+{% endspaceless %}
