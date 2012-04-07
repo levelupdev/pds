@@ -17,9 +17,10 @@ footer p.copyright {margin-right: 20px;}
 .green {color: green;}
 .red {color: red;}
 
+/* Details page */
 dl.info {
     display: block;
-    border-top: #CCC 2px solid;
+    border-top: #DDD 2px solid;
     padding-top: 30px;
     margin: 0 0 10px 0;
     width: 800px;
@@ -45,3 +46,14 @@ dl.info dd{
     margin-top: -20px;
     margin-left: 700px;
 }
+
+/* Edit pages */
+.edit_form {padding-top: 30px;}
+
+.edit_form fieldset{
+    border-bottom: #DDD 2px solid;
+    padding-bottom: 5px;
+    margin-bottom: 25px;
+}
+.edit_form .form-horizontal .control-label{width: 300px;}
+.edit_form .form-horizontal .controls{margin-left: 320px;}

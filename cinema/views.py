@@ -22,9 +22,9 @@ def protection_mixin(decorator):
     return ProtectedViewMixin
 
 LoginRequiredMixin = protection_mixin(login_required)
-AddPermissionMixin = protection_mixin(permission_required('cinema_movies.can_add'))
-ChangePermissionMixin = protection_mixin(permission_required('cinema_movies.can_change'))
-DeletePermissionMixin = protection_mixin(permission_required('cinema_movies.can_delete'))
+AddPermissionMixin = protection_mixin(permission_required('cinema.add_movie'))
+ChangePermissionMixin = protection_mixin(permission_required('cinema.change_movie'))
+DeletePermissionMixin = protection_mixin(permission_required('cinema.delete_movie'))
 
 class List(LoginRequiredMixin, ListView):
     template_name = 'list.html'

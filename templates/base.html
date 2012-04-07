@@ -10,11 +10,11 @@
         <meta name="keywords" content="{% block metakeywords %}{% endblock %}">
         <meta name="author" content="{% block metaauthor %}{% endblock %}">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico" type="image/x-icon">
 
         <!-- CSS -->
-        <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap.css">
-        <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap-responsive.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/bootstrap.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/bootstrap-responsive.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}style.css">
         {% block forestyle %}{% endblock %}
 
@@ -106,7 +106,7 @@
             <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
             <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
         <![endif]-->
-        <script type='text/javascript' src="{{ STATIC_URL }}bootstrap-alert.js"></script>
+        <script type='text/javascript' src="{{ STATIC_URL }}bootstrap/bootstrap-alert.js"></script>
                         
         <script type="text/javascript">
             $(".alert").alert();

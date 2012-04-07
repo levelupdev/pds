@@ -49,7 +49,7 @@
         <li class="previous {% if not is_paginated or not page_obj.has_previous %}disabled{% endif %}">
             <a href="./?page={{ page_obj.previous_page_number }}">&larr; Previous</a>
         </li>
-        {% if is_paginated %}<li>page #{{ page_obj.number }} of {{ paginator.count }}</li>{% endif %}
+        <li>page #{{ page_obj.number }} of {{ paginator.num_pages }}</li>
         <li class="next {% if not is_paginated or not page_obj.has_next %}disabled{% endif %}">
             <a href="./?page={{ page_obj.next_page_number }}">Next &rarr;</a>
         </li>

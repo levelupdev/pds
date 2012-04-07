@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block title %}Delete {{ object.title }}{% endblock %}
+
+{% block extra_tabs %}
+    <li class="active"><a href="{% url delete object.pk %}">Delete</a></li>
+{% endblock %}
+
+{% block content %}
+    <h2>Are you sure?</h2>
+    <div class="row">
+        <form action="./" method="post" class="well span4">
+            {% csrf_token %}
+            <p>Are you sure you want to delete '{{ object.title }}' movie and all related records?</p>
+            
+            <p>
+                <a class="btn" href="{% url list %}">Cancel</a>
+                <button type="submit" class="btn btn-danger pull-right"><i class="icon-trash icon-white"></i> Confirm</button>
+            </p>
+        </form>
+    </div>
+{% endblock %}

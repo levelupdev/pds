@@ -1,29 +1,21 @@
 {% spaceless %}
     {# typical button/link set for metadata forms #}
-    <hr/>
-    <div class="row">
-        <div class="span4">
-            {% if previous_off %}
-                &nbsp;
-            {% else %}
-                <button type="submit" class="btn" name="previous">&larr; Previous</button>
+    <div class="btn-toolbar">
+        <div class="btn-group">
+            {% if not previous_off %}
+                <button type="submit" class="btn" name="previous"><i class="icon-arrow-left icon-white"></i> Previous</button>
+            {% endif %}
+            {% if not reset_off %}
+                <a class="btn btn-inverse" href="./"><i class="icon-refresh icon-white"></i> Reset changes</a>
             {% endif %}
         </div>
-        <div class="span4">
-            {% if reset_off %}
-                &nbsp;
-            {% else %}
-                <a class="btn" href="./">Reset changes</a>
-            {% endif %}
-        </div>
-        <div class="span4">
+        
+        <div class="btn-group pull-right">
             {% if finish %}
-                <button type="submit" class="btn btn-primary" name="finish">Finish</button>
+                <button type="submit" class="btn btn-success" name="finish">Finish</button>
             {% else %}
-                {% if next_off %}
-                    &nbsp;
-                {% else %}
-                    <button type="submit" class="btn btn-primary" name="next">Next &rarr;</button>
+                {% if not next_off %}
+                    <button type="submit" class="btn btn-primary" name="next">Next <i class="icon-arrow-right icon-white"></i></button>
                 {% endif %}
             {% endif %}
         </div>

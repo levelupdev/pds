@@ -1,31 +1,66 @@
 - fields:
-    date_joined: 2012-04-02 10:48:38.403587
-    email: anonymous@example.com
+    date_joined: 2012-04-02 10:48:38
+    email: moderator@example.com
     first_name: ''
     groups: []
     is_active: true
     is_staff: true
-    is_superuser: true
-    last_login: 2012-04-03 09:47:05.747979
+    is_superuser: false
+    last_login: 2012-04-03 09:47:05
+    last_name: ''
+    password: 'pbkdf2_sha256$10000$KJXtyrFKx3q3$GBzZD8cZ9CURJ8XsQ+x4hknTCmcgzgQRe08lz/BK62w=' # 123
+    user_permissions:
+    - [add_movie, cinema, movie]
+    - [change_movie, cinema, movie]
+    - [delete_movie, cinema, movie]
+    username: moderator
+  model: auth.user
+  pk: 1
+- fields:
+    date_joined: 2012-04-07 03:07:58
+    email: writer@example.com
+    first_name: ''
+    groups: []
+    is_active: true
+    is_staff: true
+    is_superuser: false
+    last_login: 2012-04-07 03:07:58
+    last_name: ''
+    password: 'pbkdf2_sha256$10000$KJXtyrFKx3q3$GBzZD8cZ9CURJ8XsQ+x4hknTCmcgzgQRe08lz/BK62w=' # 123
+    user_permissions:
+    - [add_movie, cinema, movie]
+    - [change_movie, cinema, movie]
+    username: writer
+  model: auth.user
+  pk: 2
+- fields:
+    date_joined: 2012-04-07 03:08:34
+    email: reader@example.com
+    first_name: ''
+    groups: []
+    is_active: true
+    is_staff: false
+    is_superuser: false
+    last_login: 2012-04-07 03:08:34
     last_name: ''
     password: 'pbkdf2_sha256$10000$KJXtyrFKx3q3$GBzZD8cZ9CURJ8XsQ+x4hknTCmcgzgQRe08lz/BK62w=' # 123
     user_permissions: []
-    username: anonymous
+    username: reader
   model: auth.user
-  pk: 1
+  pk: 3
 - fields: {name: Premiere}
   model: cinema.itunesprovider
   pk: 1
 - fields:
     copyright: 2012 Distribber
     created: 2012-04-03 12:09:15.543633
-    created_by: [anonymous]
+    created_by: [moderator]
     has_theatrical_release_date: true
     is_complete: false
     itunes_provider: 1
     metadata_language: en-US
     modified: 2012-04-03 12:12:18.511317
-    modified_by: [anonymous]
+    modified_by: [moderator]
     movie_type: tv
     origin_country: US
     original_locale: ''
@@ -40,13 +75,13 @@
 - fields:
     copyright: 2012 Distribber
     created: 2012-04-03 12:09:15.543633
-    created_by: [anonymous]
+    created_by: [moderator]
     has_theatrical_release_date: true
     is_complete: false
     itunes_provider: 1
     metadata_language: en-US
     modified: 2012-04-03 12:12:18.511317
-    modified_by: [anonymous]
+    modified_by: [moderator]
     movie_type: tv
     origin_country: US
     original_locale: ''

@@ -14,10 +14,18 @@
 {% endblock %}
 
 {% block content %}
-    <form action="./" method="post" class="js_active_form">
-        {% csrf_token %}
-        {{ form|bootstrap }}
+    <div class="row">
+        <form action="./" method="post" class="edit_form span10 js_active_form">
+            {% csrf_token %}
+            <fieldset class="form-inline">
+                This input is for {{ form.movie_type }}
+            </fieldset>
+            <fieldset class="form-horizontal">
+                <h3>Step 1 of 6 - Basic Info</h3>
+                {{ form|bootstrap }}
+            </fieldset>
 
-        {% include 'base_form_buttons.html' with previous_off=1 only %} 
-    </form>
+            {% include 'base_form_buttons.html' with previous_off=1 only %} 
+        </form>
+    </div>
 {% endblock %}
