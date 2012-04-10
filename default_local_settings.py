@@ -44,3 +44,18 @@ LOGGING = {
         }
     }
 }
+
+#settings.py - necessary adjustments - example:
+APP_SERVER_SETTINGS = {
+    'host': '127.0.0.1',
+    'pidfile': join(SOURCE_ROOT, '../fcgi.pid'),
+    'port': 6281,
+    'method': 'prefork',
+    'maxchildren': 2,
+    'maxrequests': 0,
+    'debug': True,
+    'umask': '022',
+    'daemonize': 'false',
+}
+
+STATIC_FILES_VERSION = None

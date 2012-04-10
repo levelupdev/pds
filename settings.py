@@ -1,6 +1,7 @@
 # Django settings for s project.
 
-from local_settings import DEBUG, DATABASES, SOURCE_ROOT, LOGGING
+from local_settings import DEBUG, DATABASES, SOURCE_ROOT, LOGGING, STATIC_FILES_VERSION
+from local_settings import APP_SERVER_SETTINGS
 from os.path import join
 
 TEMPLATE_DEBUG = DEBUG
@@ -51,7 +52,11 @@ STATIC_ROOT = join(SOURCE_ROOT, '../static/')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+if not (STATIC_FILES_VERSION is None):
+    STATIC_URL = '/static%s/' % STATIC_FILES_VERSION
+else:
+    STATIC_URL = '/static/'
+    
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
@@ -125,6 +130,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     
     'bootstrapform',
+    'runfcgi',
     'django_extensions',
     'cinema',
 )
