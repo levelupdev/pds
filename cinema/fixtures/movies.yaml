@@ -55,7 +55,7 @@
     copyright: 2012 Distribber
     created: 2012-04-03 12:09:15.543633
     created_by: [moderator]
-    has_theatrical_release_date: true
+    theatrical_release_date_NA: true
     is_complete: false
     itunes_provider: 1
     metadata_language: en-US
@@ -76,7 +76,7 @@
     copyright: 2012 Distribber
     created: 2012-04-03 12:09:15.543633
     created_by: [moderator]
-    has_theatrical_release_date: true
+    theatrical_release_date_NA: true
     is_complete: false
     itunes_provider: 1
     metadata_language: en-US

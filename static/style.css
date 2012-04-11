@@ -50,10 +50,5 @@ dl.info dd{
 /* Edit pages */
 .edit_form {padding-top: 30px;}
 
-.edit_form fieldset{
-    border-bottom: #DDD 2px solid;
-    padding-bottom: 5px;
-    margin-bottom: 25px;
-}
 .edit_form .form-horizontal .control-label{width: 300px;}
-.edit_form .form-horizontal .controls{margin-left: 320px;}
+.edit_form .form-horizontal .controls{margin-left: 315px;}

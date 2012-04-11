@@ -20,7 +20,7 @@
         <dt>Country of Origin:</dt><dd>{{ object.origin_country }}</dd>
         <dt>Copyright:</dt><dd>{{ object.copyright }}</dd>
         <dt>Production Company:</dt><dd>{{ object.production_company }}</dd>
-        {% if object.has_theatrical_release_date %}
+        {% if not object.theatrical_release_date_NA %}
             <dt>Theatrical Release Date:</dt><dd>{{ object.theatrical_release_date|date:"Y/m/d" }}</dd>
         {% endif %}
         <dt>Synopsis:</dt><dd>{{ object.synopsis }}</dd>

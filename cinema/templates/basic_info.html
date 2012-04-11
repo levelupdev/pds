@@ -1,5 +1,5 @@
 {% extends 'base_form.html' %}
-{% load bootstrap %}
+{% load bootstrap widget_tweaks %}
 
 {% block title %}{{ form.instance.pk|yesno:'Basic Info,Add,Add' }}{% endblock %}
 
@@ -17,15 +17,68 @@
     <div class="row">
         <form action="./" method="post" class="edit_form span10 js_active_form">
             {% csrf_token %}
+            
             <fieldset class="form-inline">
-                This input is for {{ form.movie_type }}
+                <span class="control-group {{ form.movie_type.css_classes }}">
+                    This input is for
+                    <span class="controls">
+                        {{ form.movie_type|attr:"required:required"|add_class:"input-small" }}
+                        {% if form.movie_type.errors %}
+                            <span class="help-inline">{{ form.movie_type.errors.as_text|linebreaksbr }}</span>
+                        {% endif %}
+                    </span>
+                </span>
             </fieldset>
+            
+            <hr/>
+            
             <fieldset class="form-horizontal">
                 <h3>Step 1 of 6 - Basic Info</h3>
-                {{ form|bootstrap }}
+                {{ form.title|attr:"required:required"|bootstrap }}
+                {{ form.provider|bootstrap }}
+                {{ form.itunes_provider|bootstrap }}
+                {{ form.metadata_language|bootstrap }}
+                {{ form.vendor_id|bootstrap }}
+                {{ form.origin_country|bootstrap }}
+                {{ form.original_locale|bootstrap }}
+                {{ form.copyright|bootstrap }}
+                {{ form.production_company|bootstrap }}
+                
+                {# <!--theatrical_release_date--> #}
+                {% with release_date=form.theatrical_release_date release_date_NA=form.theatrical_release_date_NA %}
+                    <div class="control-group {{ release_date.css_classes }}">
+                        <label class="control-label">{{ release_date.label }}</label>
+                        <div class="controls">
+                            {{ release_date|add_class:"datepicker" }}
+                            {% if release_date.errors %}
+                                <span class="help-inline">
+                                    {{ release_date.errors.as_text|linebreaksbr }}
+                                </span>
+                            {% endif %}
+                            
+                            &nbsp;
+                            <label class="checkbox inline">{{ release_date_NA }}<span>{{ release_date_NA.label }}</span></label>
+                        </div>
+                    </div>
+                {% endwith %}
+                
+                {{ form.synopsis|add_class:"input-block-level"|bootstrap }}
             </fieldset>
-
+            
             {% include 'base_form_buttons.html' with previous_off=1 only %} 
         </form>
     </div>
+{% endblock %}
+
+{% block endjs %}
+    <script type="text/javascript">
+        var $theatrical_release_date = $('#id_theatrical_release_date');
+        $('#id_theatrical_release_date_NA').change(function(){
+            if (this.checked){
+                $theatrical_release_date.attr('disabled', 'disabled');
+            } else {
+                $theatrical_release_date.removeAttr('disabled');
+            }
+        }).change();
+    </script>
 {% endblock %}

@@ -15,6 +15,7 @@
         <!-- CSS -->
         <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/bootstrap.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/bootstrap-responsive.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/datepicker.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}style.css">
         {% block forestyle %}{% endblock %}
 
@@ -107,9 +108,12 @@
             <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
         <![endif]-->
         <script type='text/javascript' src="{{ STATIC_URL }}bootstrap/bootstrap-alert.js"></script>
-                        
+        <script type='text/javascript' src="{{ STATIC_URL }}bootstrap/bootstrap-datepicker.js"></script>
+        
         <script type="text/javascript">
             $(".alert").alert();
+            $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
+            
             {# activate first input or select #}
             $('.js_active_form input[type!=hidden]:first, .js_active_form select:first').first().focus();
         </script>

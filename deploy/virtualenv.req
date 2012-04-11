@@ -4,5 +4,6 @@ flup
 django==1.4
 
 django_extensions==0.8
+django-widget-tweaks
 git+git://github.com/tzangms/django-bootstrap-form.git@046136564b36cf5b88c0b443096ab6c10a2a094a
 hg+https://bitbucket.org/levelup/runfcgi@8f58111b057b

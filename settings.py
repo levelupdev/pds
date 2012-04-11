@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'runfcgi',
     'django_extensions',
     'cinema',
+    'widget_tweaks',
 )
 
 LOGIN_URL = '/login/'

@@ -26,10 +26,10 @@ class Movie(TimeStampedModel):
     metadata_language = models.CharField(max_length=100, blank=True)
     vendor_id = models.CharField(max_length=100, blank=True)
     origin_country = models.CharField(max_length=100, blank=True)
-    original_locale = models.CharField(max_length=100, blank=True, help_text = 'original spoken locale of movie')
+    original_locale = models.CharField(max_length=100, blank=True, help_text = 'Original spoken locale of movie')
     copyright = models.CharField(max_length=100, blank=True)
     production_company = models.CharField(max_length=100, blank=True)
-    has_theatrical_release_date = models.BooleanField(default=True)
+    theatrical_release_date_NA = models.BooleanField(default=True)
     theatrical_release_date = models.DateField(null=True, blank=True)
     synopsis = models.TextField(blank=True)
     

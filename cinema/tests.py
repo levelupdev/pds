@@ -144,11 +144,43 @@ class DeleteTest(BaseChangeTest):
         self.assertEqual(self.start_movie_count-1, Movie.objects.all().count())
 
 class AddTest(BaseChangeTest):
-    pass
-#    TODO
-#    def test_add(self):
-#        response = self.client.post(reverse('add'), data={
-#        
-#        })
-#        self.assertEqual(response.status_code, 302)
-#        self.assertEqual(self.start_movie_count+1, Movie.objects.all().count())
+    base_form_data = {
+        'movie_type': 'tv',
+        'title': 'Serial C',
+        'provider': 'Distribber',
+        'itunes_provider': 1,
+        'metadata_language': 'en-US',
+        'vendor_id': '129834IUH',
+        'origin_country': 'US',
+        'original_locale': 'en-us',
+        'copyright': '2012 Distribber',
+        'production_company': 'Distribber Yearof',
+        'theatrical_release_date': '1970-10-02',
+        'synopsis': 'This is a great movie',
+        'next': True,
+    }
+    
+    def test_add(self):
+        # incorrect input
+        data = self.base_form_data.copy()
+        del data['movie_type']
+        data['theatrical_release_date'] = '1970'
+        incorrect_fields = ('movie_type', 'theatrical_release_date')
+        
+        # check for error messages on the page
+        response = self.client.post(reverse('add'), data=data)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('form' in response.context)
+        form = response.context['form']
+        for field_name in incorrect_fields:
+            msg_prefix = "Incorrect '%s' input" % field_name
+            self.assertTrue(form[field_name].errors)
+         
+            for error in form[field_name].errors:
+                self.assertContains(response, error, msg_prefix = msg_prefix)
+            
+        # check for object creation
+        data = self.base_form_data.copy()
+        response = self.client.post(reverse('add'), data=data)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.start_movie_count+1, Movie.objects.all().count())
