@@ -1,0 +1,18 @@
+- fields:
+    date_joined: 2012-04-11 12:39:16.300004
+    email: demo@xample.com
+    first_name: ''
+    groups: []
+    is_active: true
+    is_staff: true
+    is_superuser: true
+    last_login: 2012-04-11 12:39:16.300004
+    last_name: ''
+    password: 'pbkdf2_sha256$10000$Enp7Nq7QkeP6$hXnX5JhgbJTy5h6z+y0ICxl5Uo7pgN+jHcmmdj777LU=' # demo
+    user_permissions:
+    - [add_movie, cinema, movie]
+    - [change_movie, cinema, movie]
+    - [delete_movie, cinema, movie]
+    username: demo
+  model: auth.user
+  pk: 100 # we don't need conflict with other fixture
