@@ -43,3 +43,52 @@ class Movie(TimeStampedModel):
     
     def __unicode__(self):
         return self.title
+
+def enumerable_model_factory(name):
+    class BaseEnumerable(models.Model):
+        title = models.CharField(max_length = 100, primary_key=True)
+        
+        class Meta:
+            ordering = 'title'
+            abstract = True
+
+        def __unicode__(self):
+            return self.title
+    class Meta:
+        app_label = 'cinema'
+
+    return type(name, (BaseEnumerable,), {'__module__': '', 'Meta': Meta})
+
+Territory = enumerable_model_factory('Territory')
+RatingSystem = enumerable_model_factory('RatingSystem')
+PriceTier = enumerable_model_factory('PriceTier')
+
+class Rating(models.Model):
+    value = models.CharField(max_length = 100)
+    system = models.ForeignKey(RatingSystem)
+    
+    class Meta:
+        unique_together = ( ('value', 'system'), )
+
+    def __unicode__(self):
+        return self.value + ' - ' + self.system_id
+
+class MovieRating(models.Model):
+    movie = models.ForeignKey(Movie, related_name='ratings')
+    rating = models.ForeignKey(Rating)
+    territory = models.ForeignKey(Territory)
+    reason = models.CharField(max_length = 100, blank=True)
+    price_tier = models.ForeignKey(PriceTier)
+    
+    def __unicode__(self):
+        return '%s - %s (rating=%s, related for=%s, Price Tier=%s)' % (
+            self.movie, self.territory_id, self.rating, self.reason, self.price_tier_id)
+
+Genre = enumerable_model_factory('Genre')
+
+class MovieGenre(models.Model):
+    movie = models.ForeignKey(Movie, related_name='genres')
+    genre = models.ForeignKey(Genre)
+
+    def __unicode__(self):
+        return unicode(self.movie) + ' - ' + self.genre_id

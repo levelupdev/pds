@@ -29,8 +29,24 @@
     <h3>Territory, Rating and Genre</h3>
     {% if can_change %}<a class="edit_link" href="{% url edit_rating_and_genre object.pk %}">Edit</a>{% endif %}
     <dl class="info">
-        <dt>Territory:</dt><dd>{{ object }}<br/>{{ object }}</dd>
-        <dt>Genre:</dt><dd>{{ object }}<br/>{{ object }}</dd>
+        <dt>Territory:</dt>
+        <dd>
+            {% for rating in object.ratings.all %}
+                {{ rating.territory_id }} (rating={{ rating.rating.value }},
+                    related for={{ rating.reason }},
+                    rating system={{ rating.rating.system }},
+                    Price Tier={{ rating.price_tier_id }})
+                {% if not forloop.last %}<br/>{% endif %}
+            {% endfor %}
+        </dd>
+                    
+        <dt>Genre:</dt>
+        <dd>
+            {% for genre in object.genres.all %}
+                {{ genre.genre_id|capfirst }}
+                {% if not forloop.last %}<br/>{% endif %}
+            {% endfor %}
+        </dd>
     </dl>
 
     <h3>Crew and Cast</h3>

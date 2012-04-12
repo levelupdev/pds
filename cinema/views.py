@@ -11,7 +11,7 @@ from django.contrib.messages import success, error
 from django.contrib.auth.decorators import permission_required
 
 from models import Movie
-from forms import BasicInfo as BasicInfoForm
+from forms import BasicInfo as BasicInfoForm, MovieRatingFormset, MovieGenreFormset
 
 def protection_mixin(decorator):
     'Fabric. Generates ProtectedViewMixin for specified decorator, e.g. login_required'
@@ -94,3 +94,31 @@ class BasicInfoEdit(BaseMovieFormMixin, ChangePermissionMixin, UpdateView):
     template_name = 'basic_info.html'
     form_class = BasicInfoForm
     get_next_url = lambda self: reverse('edit_rating_and_genre', kwargs={'pk': self.object.pk})
+
+class RatingGenreEdit(BaseMovieFormMixin, ChangePermissionMixin, UpdateView):
+    template_name = 'rating_and_genre.html'
+    get_next_url = lambda self: reverse('edit_rating_and_genre', kwargs={'pk': self.object.pk})
+    
+    #TODO
+    
+#    def form_valid(self, form):
+#        context = self.get_context_data()
+#        bookimage_form = context['bookimage_formset']
+#        bookpage_form = context['bookpage_formset']
+#        if bookimage_form.is_valid() and bookpage_form.is_valid():
+#            self.object = form.save()
+#            bookimage_form.instance = self.object
+#            bookimage_form.save()
+#            bookpage_form.instance = self.object
+#            bookpage_form.save()
+#            return HttpResponseRedirect('thanks/')
+#        else:
+#            return self.render_to_response(self.get_context_data(form=form))
+
+#    post(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(RatingGenreEdit, self).get_context_data(**kwargs)
+        context['rating_formset'] = MovieRatingFormset(instance = self.object, data = self.request.POST or None)
+        context['genre_formset'] = MovieGenreFormset(instance = self.object, data = self.request.POST or None)
+        return context

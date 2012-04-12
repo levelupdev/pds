@@ -21,8 +21,8 @@ footer p.copyright {margin-right: 20px;}
 dl.info {
     display: block;
     border-top: #DDD 2px solid;
-    padding-top: 30px;
-    margin: 0 0 10px 0;
+    padding-top: 20px;
+    margin: 0 0 30px 0;
     width: 800px;
 }
 dl.info dt{
@@ -48,7 +48,14 @@ dl.info dd{
 }
 
 /* Edit pages */
-.edit_form {padding-top: 30px;}
+fieldset {margin-top: 20px;}
 
 .edit_form .form-horizontal .control-label{width: 300px;}
 .edit_form .form-horizontal .controls{margin-left: 315px;}
+
+.inline_formset.table {width: auto;}
+.inline_formset.table td {
+    padding: 6px 8px 0 8px;
+    border-top: 0;
+} 
+.inline_formset.table thead th {padding-bottom: 0;}

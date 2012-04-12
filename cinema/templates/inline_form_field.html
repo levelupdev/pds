@@ -1,0 +1,8 @@
+{% spaceless %}{% load widget_tweaks %}
+{# <!--Displays field of inline form in the table. Expects params 'field', 'classes' and 'attrs' --> #}
+
+<td class="controls {{ field.css_classes }}" {% if field.errors %}title="{{ field.errors.as_text }}"{% endif %}" >
+    {{ field|add_class:classes|attr:attrs }}
+</td>
+
+{% endspaceless %}

@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 
-from views import List, MovieDetails, Add, Delete, BasicInfoEdit
+from views import List, MovieDetails, Add, Delete, BasicInfoEdit, RatingGenreEdit
 
 urlpatterns = patterns('',
     # Examples:
@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     url(r'^add/$', Add.as_view(), name='add'),
     url(r'^delete/(?P<pk>\d+)/$', Delete.as_view(), name='delete'),
     url(r'^basic_info/(?P<pk>\d+)/$', BasicInfoEdit.as_view(), name='edit_basic_info'),
-    url(r'^rating_and_genre/(?P<pk>\d+)/$', BasicInfoEdit.as_view(), name='edit_rating_and_genre'),
+    url(r'^rating_and_genre/(?P<pk>\d+)/$', RatingGenreEdit.as_view(), name='edit_rating_and_genre'),
     url(r'^crew_and_cast/(?P<pk>\d+)/$', BasicInfoEdit.as_view(), name='edit_crew_and_cast'),
     url(r'^sales_info/(?P<pk>\d+)/$', BasicInfoEdit.as_view(), name='edit_sales_info'),
     url(r'^art/(?P<pk>\d+)/$', BasicInfoEdit.as_view(), name='edit_art'),

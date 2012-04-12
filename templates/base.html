@@ -109,10 +109,14 @@
         <![endif]-->
         <script type='text/javascript' src="{{ STATIC_URL }}bootstrap/bootstrap-alert.js"></script>
         <script type='text/javascript' src="{{ STATIC_URL }}bootstrap/bootstrap-datepicker.js"></script>
+        <script type='text/javascript' src="{{ STATIC_URL }}bootstrap/bootstrap-tooltip.js"></script>
         
         <script type="text/javascript">
             $(".alert").alert();
-            $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
+            $('.js_datepicker').datepicker({'format': 'yyyy-mm-dd'});
+            
+            // errors for inline forms are displayed via tooltip
+            $('.errors[title]').tooltip();
             
             {# activate first input or select #}
             $('.js_active_form input[type!=hidden]:first, .js_active_form select:first').first().focus();

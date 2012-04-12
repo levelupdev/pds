@@ -26,14 +26,14 @@
                         {% if form.movie_type.errors %}
                             <span class="help-inline">{{ form.movie_type.errors.as_text|linebreaksbr }}</span>
                         {% endif %}
-                    </span>
+                    </spafieldsetn>
                 </span>
             </fieldset>
             
             <hr/>
             
+            <h3>Step 1 of 6 - Basic Info</h3>
             <fieldset class="form-horizontal">
-                <h3>Step 1 of 6 - Basic Info</h3>
                 {{ form.title|attr:"required:required"|bootstrap }}
                 {{ form.provider|bootstrap }}
                 {{ form.itunes_provider|bootstrap }}
@@ -49,7 +49,7 @@
                     <div class="control-group {{ release_date.css_classes }}">
                         <label class="control-label">{{ release_date.label }}</label>
                         <div class="controls">
-                            {{ release_date|add_class:"datepicker" }}
+                            {{ release_date|add_class:"js_datepicker" }}
                             {% if release_date.errors %}
                                 <span class="help-inline">
                                     {{ release_date.errors.as_text|linebreaksbr }}
@@ -65,7 +65,11 @@
                 {{ form.synopsis|add_class:"input-block-level"|bootstrap }}
             </fieldset>
             
-            {% include 'base_form_buttons.html' with previous_off=1 only %} 
+            {% if form.instance.pk %}
+                {% include 'base_form_buttons.html' with previous_off=1 only %}
+            {% else %}
+                {% include 'base_form_buttons.html' with save_text='Create and Add more' only %}
+            {% endif %}
         </form>
     </div>
 {% endblock %}

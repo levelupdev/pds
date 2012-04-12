@@ -1,12 +1,13 @@
 from django import forms
+from django.forms.models import inlineformset_factory
 
-from models import Movie
+from models import Movie, MovieRating, MovieGenre
 
-class BaseMovieEdit(forms.ModelForm):
+class BaseMovieForm(forms.ModelForm):
     error_css_class = 'error'
     
     def save(self, author, commit=True):
-        obj = super(BaseMovieEdit, self).save(commit=False)
+        obj = super(BaseMovieForm, self).save(commit=False)
 
         obj.created_by = (obj.created_by_id and obj.created_by) or author
         obj.modified_by = author
@@ -16,7 +17,7 @@ class BaseMovieEdit(forms.ModelForm):
 
         return obj
         
-class BasicInfo(BaseMovieEdit):
+class BasicInfo(BaseMovieForm):
     def __init__(self, *args, **kwargs):
         super(BasicInfo, self).__init__(*args, **kwargs)
         self.fields['itunes_provider'].label = "Provider (for iTunes)"
@@ -34,3 +35,6 @@ class BasicInfo(BaseMovieEdit):
             'vendor_id', 'origin_country', 'original_locale', 'copyright',
             'production_company', 'theatrical_release_date_NA', 'theatrical_release_date', 'synopsis',
         )
+
+MovieRatingFormset = inlineformset_factory(Movie, MovieRating, extra=1)
+MovieGenreFormset = inlineformset_factory(Movie, MovieGenre, max_num=3, extra=3)

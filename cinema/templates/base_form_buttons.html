@@ -7,6 +7,13 @@
             {% if not previous_off %}
                 <button type="submit" class="btn" name="previous"><i class="icon-arrow-left icon-white"></i> Previous</button>
             {% endif %}
+            
+            {% if not save_off %}
+                <button type="submit" class="btn">{% firstof save_text 'Save' %}</button>
+            {% endif %}
+        </div>
+        
+        <div class="btn-group">
             {% if not reset_off %}
                 <a class="btn btn-inverse" href="./"><i class="icon-refresh icon-white"></i> Reset changes</a>
             {% endif %}
