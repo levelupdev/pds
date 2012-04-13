@@ -53,7 +53,7 @@ class RatingGenreEdit(BaseMovieFormsMixin, ChangePermissionMixin, MultipleFormsV
     'differs by multiple formset on the page'
     
     template_name = 'rating_and_genre.html'
-    get_next_url = lambda self: reverse('edit_rating_and_genre', kwargs={'pk': self.object.pk})
+    get_next_url = lambda self: reverse('edit_crew_and_cast', kwargs={'pk': self.object.pk})
     form_classes = {
         'ratings': MovieRatingFormset,
         'genres': MovieGenreFormset,

@@ -1,8 +1,12 @@
 {% spaceless %}{% load widget_tweaks %}
 {# <!--Displays field of inline form in the table. Expects params 'field', 'classes' and 'attrs' --> #}
 
-<td class="control-group {{ field.css_classes }}" {% if field.errors %}title="{{ field.errors.as_text }}"{% endif %}" >
-    {{ field|add_class:classes|attr:attrs }}
+<td class="control-group {{ field.css_classes }}" {% if field.errors %}title="{{ field.errors.as_text }}"{% endif %}>
+    {% if attrs %}
+        {{ field|add_class:classes|attr:attrs }}
+    {% else %}
+        {{ field|add_class:classes }}
+    {% endif %}
 </td>
 
 {% endspaceless %}

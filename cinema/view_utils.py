@@ -2,6 +2,7 @@ from django.views.generic.base import View, TemplateResponseMixin
 from django.views.generic.edit import FormMixin, ProcessFormView, ModelFormMixin
 from django.utils.decorators import method_decorator
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.decorators import login_required
@@ -140,4 +141,5 @@ class BaseMovieFormsMixin(MultipleFormsMixin, BaseMovieFormMixin):
 
     def forms_invalid(self, forms):
         error(self.request, 'Please correct inputs')
+        self.update_object_timestamps()
         return super(BaseMovieFormsMixin, self).forms_invalid(forms)

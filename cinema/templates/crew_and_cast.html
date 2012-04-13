@@ -30,10 +30,10 @@
                     <tbody>
                         {% for form in forms.ratings %}
                             <tr>
-                                {% include 'inline_form_field.html' with field=form.territory classes='input-small required' only %}
-                                {% include 'inline_form_field.html' with field=form.rating classes='input-small required' only %}
-                                {% include 'inline_form_field.html' with field=form.reason classes='' only%}
-                                {% include 'inline_form_field.html' with field=form.price_tier classes='input-small required' only %}
+                                {% include 'inline_form_field.html' with field=form.territory classes='input-small required' attrs='' only %}
+                                {% include 'inline_form_field.html' with field=form.rating classes='input-small required' attrs='' only %}
+                                {% include 'inline_form_field.html' with field=form.reason classes='' attrs='' only%}
+                                {% include 'inline_form_field.html' with field=form.price_tier classes='input-small required' attrs='' only %}
                                 <td>
                                     {{ form.DELETE }}
 
@@ -45,10 +45,10 @@
                         {% endfor %}
                         {# <!-- table row template --> #}
                         <tr class="hide js_template_row">
-                            {% include 'inline_form_field.html' with field=forms.ratings.empty_form.territory classes='input-small required' only %}
-                            {% include 'inline_form_field.html' with field=forms.ratings.empty_form.rating classes='input-small required' only %}
-                            {% include 'inline_form_field.html' with field=forms.ratings.empty_form.reason classes='' only%}
-                            {% include 'inline_form_field.html' with field=forms.ratings.empty_form.price_tier classes='input-small required' only %}
+                            {% include 'inline_form_field.html' with field=forms.ratings.empty_form.territory classes='input-small required' attrs='' only %}
+                            {% include 'inline_form_field.html' with field=forms.ratings.empty_form.rating classes='input-small required' attrs='' only %}
+                            {% include 'inline_form_field.html' with field=forms.ratings.empty_form.reason classes='' attrs='' only%}
+                            {% include 'inline_form_field.html' with field=forms.ratings.empty_form.price_tier classes='input-small required' attrs='' only %}
                             <td>
                                 {% for field in forms.ratings.empty_form.hidden_fields %}
                                     {{ field }}
@@ -73,7 +73,7 @@
                     <tbody>
                         {% for form in forms.genres %}
                             <tr class="control-group">
-                                {% include 'inline_form_field.html' with field=form.genre classes='required' only %}
+                                {% include 'inline_form_field.html' with field=form.genre classes='required' attrs='' only %}
                                 <td>
                                     {{ form.DELETE }}
 

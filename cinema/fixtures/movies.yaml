@@ -1,3 +1,5 @@
+# ------------------- USERS -------------------
+
 - fields:
     date_joined: 2012-04-02 10:48:38
     email: moderator@example.com
@@ -72,6 +74,9 @@
     username: reader
   model: auth.user
   pk: 3
+
+# ---------------------------------- Movies ----------------------------
+
 - fields: {name: Premiere}
   model: cinema.itunesprovider
   pk: 1
@@ -116,4 +121,45 @@
     title: Serial B
     vendor_id: 129834IUH
   model: cinema.movie
+  pk: 2
+
+# --------------------------- Ratings and Genres ----------------------
+- fields: {}
+  model: cinema.territory
+  pk: US
+- fields: {}
+  model: cinema.territory
+  pk: CA
+- fields: {}
+  model: cinema.ratingsystem
+  pk: mpaa
+- fields: {}
+  model: cinema.ratingsystem
+  pk: caa
+- fields: {}
+  model: cinema.pricetier
+  pk: '4'
+- fields: {system: mpaa, value: R}
+  model: cinema.rating
+  pk: 1
+- fields: {system: caa, value: R}
+  model: cinema.rating
+  pk: 2
+- fields: {movie: 1, price_tier: '4', rating: 1, reason: violence, territory: US}
+  model: cinema.movierating
+  pk: 1
+- fields: {movie: 1, price_tier: '4', rating: 2, reason: '', territory: CA}
+  model: cinema.movierating
+  pk: 2
+- fields: {}
+  model: cinema.genre
+  pk: drama
+- fields: {}
+  model: cinema.genre
+  pk: comedy
+- fields: {genre: drama, movie: 1}
+  model: cinema.moviegenre
+  pk: 1
+- fields: {genre: comedy, movie: 1}
+  model: cinema.moviegenre
   pk: 2
