@@ -1,30 +1,15 @@
 import operator
 
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 from django.views.generic import UpdateView, ListView, DetailView, CreateView, DeleteView
 from django.db.models import Q
-from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 from django.contrib.messages import success, error
-from django.contrib.auth.decorators import permission_required
 
 from models import Movie
 from forms import BasicInfo as BasicInfoForm, MovieRatingFormset, MovieGenreFormset
-
-def protection_mixin(decorator):
-    'Fabric. Generates ProtectedViewMixin for specified decorator, e.g. login_required'
-    class ProtectedViewMixin(object):
-        @method_decorator(decorator)
-        def dispatch(self, *args, **kwargs):
-            return super(ProtectedViewMixin, self).dispatch(*args, **kwargs)
-    return ProtectedViewMixin
-
-LoginRequiredMixin = protection_mixin(login_required)
-AddPermissionMixin = protection_mixin(permission_required('cinema.add_movie'))
-ChangePermissionMixin = protection_mixin(permission_required('cinema.change_movie'))
-DeletePermissionMixin = protection_mixin(permission_required('cinema.delete_movie'))
+from view_utils import LoginRequiredMixin, AddPermissionMixin, ChangePermissionMixin, DeletePermissionMixin 
+from view_utils import MultipleFormsView, BaseMovieFormMixin, BaseMovieFormsMixin
 
 class List(LoginRequiredMixin, ListView):
     template_name = 'list.html'
@@ -46,37 +31,6 @@ class MovieDetails(LoginRequiredMixin, DetailView):
     template_name = 'details.html'
     model = Movie
 
-class BaseMovieFormMixin(object):
-    ''' Mixin to use with FormView for Movie model
-        handles "previous" and "next" request params,
-        expects forms.BaseMovieEdit form subclass,
-        expects get_next_url and get_previous_url methods instead of get_success_url
-    '''
-    
-    model = Movie
-    get_previous_url = get_next_url = None
-        
-    def form_valid(self, form):
-        obj = self.object = form.save(self.request.user, commit=False)
-        obj.is_complete = obj.is_complete or 'finish' in self.request.REQUEST
-        obj.save()
-        success(self.request, "Movie '%s' was successfully saved" % obj.title)
-        
-        if 'next' in self.request.REQUEST and self.get_next_url:
-            url = self.get_next_url()
-        elif 'previous' in self.request.REQUEST and self.get_previous_url:
-            url = self.get_previous_url()
-        elif 'finish' in self.request.REQUEST:
-            url = reverse('list')
-        else:
-            url = self.request.path
-        
-        return HttpResponseRedirect(url)
-
-    def form_invalid(self, form):
-        error(self.request, 'Please correct inputs')
-        return super(BaseMovieFormMixin, self).form_invalid(form)
-
 class Add(BaseMovieFormMixin, AddPermissionMixin, CreateView):
     template_name = 'basic_info.html'
     form_class = BasicInfoForm
@@ -95,30 +49,12 @@ class BasicInfoEdit(BaseMovieFormMixin, ChangePermissionMixin, UpdateView):
     form_class = BasicInfoForm
     get_next_url = lambda self: reverse('edit_rating_and_genre', kwargs={'pk': self.object.pk})
 
-class RatingGenreEdit(BaseMovieFormMixin, ChangePermissionMixin, UpdateView):
+class RatingGenreEdit(BaseMovieFormsMixin, ChangePermissionMixin, MultipleFormsView):
+    'differs by multiple formset on the page'
+    
     template_name = 'rating_and_genre.html'
     get_next_url = lambda self: reverse('edit_rating_and_genre', kwargs={'pk': self.object.pk})
-    
-    #TODO
-    
-#    def form_valid(self, form):
-#        context = self.get_context_data()
-#        bookimage_form = context['bookimage_formset']
-#        bookpage_form = context['bookpage_formset']
-#        if bookimage_form.is_valid() and bookpage_form.is_valid():
-#            self.object = form.save()
-#            bookimage_form.instance = self.object
-#            bookimage_form.save()
-#            bookpage_form.instance = self.object
-#            bookpage_form.save()
-#            return HttpResponseRedirect('thanks/')
-#        else:
-#            return self.render_to_response(self.get_context_data(form=form))
-
-#    post(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(RatingGenreEdit, self).get_context_data(**kwargs)
-        context['rating_formset'] = MovieRatingFormset(instance = self.object, data = self.request.POST or None)
-        context['genre_formset'] = MovieGenreFormset(instance = self.object, data = self.request.POST or None)
-        return context
+    form_classes = {
+        'ratings': MovieRatingFormset,
+        'genres': MovieGenreFormset,
+    }

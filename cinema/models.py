@@ -44,24 +44,24 @@ class Movie(TimeStampedModel):
     def __unicode__(self):
         return self.title
 
-def enumerable_model_factory(name):
-    class BaseEnumerable(models.Model):
-        title = models.CharField(max_length = 100, primary_key=True)
-        
-        class Meta:
-            ordering = 'title'
-            abstract = True
-
-        def __unicode__(self):
-            return self.title
+class BaseEnumerable(models.Model):
+    title = models.CharField(max_length = 100, primary_key=True)
+    
     class Meta:
-        app_label = 'cinema'
+        ordering = ('title',)
+        abstract = True
 
-    return type(name, (BaseEnumerable,), {'__module__': '', 'Meta': Meta})
+    def __unicode__(self):
+        return self.title
 
-Territory = enumerable_model_factory('Territory')
-RatingSystem = enumerable_model_factory('RatingSystem')
-PriceTier = enumerable_model_factory('PriceTier')
+class Territory(BaseEnumerable):
+    pass
+
+class RatingSystem(BaseEnumerable):
+    pass
+
+class PriceTier(BaseEnumerable):
+    pass
 
 class Rating(models.Model):
     value = models.CharField(max_length = 100)
@@ -84,7 +84,8 @@ class MovieRating(models.Model):
         return '%s - %s (rating=%s, related for=%s, Price Tier=%s)' % (
             self.movie, self.territory_id, self.rating, self.reason, self.price_tier_id)
 
-Genre = enumerable_model_factory('Genre')
+class Genre(BaseEnumerable):
+    pass
 
 class MovieGenre(models.Model):
     movie = models.ForeignKey(Movie, related_name='genres')

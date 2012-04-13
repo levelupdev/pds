@@ -13,13 +13,13 @@
     <div class="row">
         <form action="./" method="post" class="edit_form span10 js_active_form">
             {% csrf_token %}
-            {{ rating_formset.management_form }}
 
             <h3>Step 2 of 6 - Territory, Rating and Genre</h3>
             <fieldset>
+                {{ forms.ratings.management_form }}
                 <table class="table inline_formset js_formset">
-                    <thead class="control-group">
-                        <tr class="controls">
+                    <thead>
+                        <tr class="control-group">
                             <th><label class="control-label">Territory</label></th>
                             <th><label class="control-label">Rating</label></th>
                             <th><label class="control-label">Reason</label></th>
@@ -28,9 +28,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for form in rating_formset %}
-                            {# <!-- last form is empty all time. We use it as template--> #}
-                            <tr class="control-group {{ forloop.last|yesno:'hide js_template_row,' }}">
+                        {% for form in forms.ratings %}
+                            <tr>
                                 {% include 'inline_form_field.html' with field=form.territory classes='input-small' attrs='' only %}
                                 {% include 'inline_form_field.html' with field=form.rating classes='input-small' attrs='' only %}
                                 {% include 'inline_form_field.html' with field=form.reason classes='' attrs='' only%}
@@ -44,14 +43,14 @@
                                 </td>
                             </tr>
                         {% endfor %}
-                        <tr>{{ rating_formset.empty_form }}</tr>
-                        <tr class="control-group hide js_template_row">
-                            {% include 'inline_form_field.html' with field=rating_formset.empty_form.territory classes='input-small' attrs='' only %}
-                            {% include 'inline_form_field.html' with field=rating_formset.empty_form.rating classes='input-small' attrs='' only %}
-                            {% include 'inline_form_field.html' with field=rating_formset.empty_form.reason classes='' attrs='' only%}
-                            {% include 'inline_form_field.html' with field=rating_formset.empty_form.price_tier classes='input-small' attrs='' only %}
+                        {# <!-- table row template --> #}
+                        <tr class="hide js_template_row">
+                            {% include 'inline_form_field.html' with field=forms.ratings.empty_form.territory classes='input-small' attrs='' only %}
+                            {% include 'inline_form_field.html' with field=forms.ratings.empty_form.rating classes='input-small' attrs='' only %}
+                            {% include 'inline_form_field.html' with field=forms.ratings.empty_form.reason classes='' attrs='' only%}
+                            {% include 'inline_form_field.html' with field=forms.ratings.empty_form.price_tier classes='input-small' attrs='' only %}
                             <td>
-                                {% for field in rating_formset.empty_form.hidden_fields %}
+                                {% for field in forms.ratings.empty_form.hidden_fields %}
                                     {{ field }}
                                 {% endfor %}
                             </td>
@@ -61,10 +60,31 @@
             </fieldset>
             
             <hr/>
-            
-            <fieldset class="control-group">
-                <label>Genre(s)</label>
-                
+
+            <fieldset>
+                {{ forms.genres.management_form }}
+                <table class="table inline_formset">
+                    <thead>
+                        <tr class="control-group">
+                            <th><label class="control-label">Genre</label></th>
+                            <th><label class="control-label">Delete</label></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for form in forms.genres %}
+                            <tr class="control-group">
+                                {% include 'inline_form_field.html' with field=form.genre classes='' attrs='' only %}
+                                <td>
+                                    {{ form.DELETE }}
+
+                                    {% for field in form.hidden_fields %}
+                                        {{ field }}
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </fieldset>
             
             {% include 'base_form_buttons.html' with previous_off=1 only %} 
