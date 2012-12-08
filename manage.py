@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!../env/bin/python
 import os, sys
 from django.core.management import execute_from_command_line
 
